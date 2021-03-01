@@ -34,9 +34,9 @@ def get_figure(v_out, i_out, p_out):
     # rcParams['font.sans-serif'] = ["cambria math"]
 
     # Delete all files in folder
-    file_list = [f for f in os.listdir(".") if f.endswith(".png")]
+    file_list = [f for f in os.listdir("./app/static") if f.endswith(".png")]
     for f in file_list:
-        os.remove(f)
+        os.remove(os.path.join("app", "static", f))
 
     # generate new plots
     now = datetime.now()
@@ -47,7 +47,8 @@ def get_figure(v_out, i_out, p_out):
     ax.set_ylim(0, 2 * (max(i_out) // 2) + 2)
     ax.set_xlim(0, 5 * (v_out[-1] // 5) + 5)
     iv_curve = "IV-" + now.strftime('%m%d%H%M%S') + ".png"
-    plt.savefig(iv_curve, bbox_inches='tight')
+    path = os.path.join("app", "static", iv_curve)
+    plt.savefig(path, bbox_inches='tight')
 
     fig = plt.figure(figsize=(4, 2.25), dpi=300)
     ax = plt.gca()
@@ -56,6 +57,6 @@ def get_figure(v_out, i_out, p_out):
     ax.set_ylim(0, 10 * (max(p_out) // 10) + 10)
     ax.set_xlim(0, 5 * (v_out[-1] // 5) + 5)
     pv_curve = "PV-" + now.strftime('%m%d%H%M%S') + ".png"
-
-    plt.savefig(pv_curve, bbox_inches='tight')
+    path = os.path.join("app", "static", pv_curve)
+    plt.savefig(path, bbox_inches='tight')
     return iv_curve, pv_curve

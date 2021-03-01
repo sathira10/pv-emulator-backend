@@ -17,6 +17,7 @@ def param_ext():
     data = request.form.to_dict()
     print(data)
     result = get_params(data)
+    print(result)
     return result
 
 
